@@ -1,1 +1,1 @@
-import generate_ssl_certificate.create_ssl_certificate
+from generate_ssl_certificate import create_self_signed_cert
