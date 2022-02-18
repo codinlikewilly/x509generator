@@ -5,11 +5,11 @@ import sys
 import os
 
 
-def create_self_signed_cert(cert_file_path, CN, O, OU, L, ST, C, email):
+def create_self_signed_cert(dump_directory, CN, O, OU, L, ST, C, email):
     """
     Set the serial number of the certificate.
 
-    :param cert_file_path:
+    :param dump_directory: path where keys should be stored
     :type string: :py:class:`str`
     :param CN: fqdn of your site.
     :type string: :py:class:`str`
@@ -29,8 +29,9 @@ def create_self_signed_cert(cert_file_path, CN, O, OU, L, ST, C, email):
     :return: :py:data`None`
     """
     os.chdir(sys.path[0])
-    private_key_path = re.sub(r".(pem|crt)$", ".key", cert_file_path, flags=re.IGNORECASE)
-
+    # private_key_path = re.sub(r".(pem|crt)$", ".key", cert_file_path, flags=re.IGNORECASE)
+    private_key_path = (os.path.join(dump_directory, "auth-key.pem"))
+    cert_file_path = (os.path.join(dump_directory, "auth-cert.pem"))
     # create public/private key
     key = PKey()
     key.generate_key(TYPE_RSA, 4096)
