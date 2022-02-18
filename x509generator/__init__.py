@@ -1,1 +1,1 @@
-from generate_ssl_certificate import create_self_signed_cert
+from x509generator.generate_ssl_certificate import create_self_signed_cert

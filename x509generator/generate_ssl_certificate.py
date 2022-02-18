@@ -9,6 +9,8 @@ def create_self_signed_cert(cert_file_path, CN, O, OU, L, ST, C, email):
     """
     Set the serial number of the certificate.
 
+    :param cert_file_path:
+    :type string: :py:class:`str`
     :param CN: fqdn of your site.
     :type string: :py:class:`str`
     :param O: Organization name.
@@ -31,7 +33,7 @@ def create_self_signed_cert(cert_file_path, CN, O, OU, L, ST, C, email):
 
     # create public/private key
     key = PKey()
-    key.generate_key(TYPE_RSA, 2048)
+    key.generate_key(TYPE_RSA, 4096)
 
     # Self-signed cert
     cert = X509()
@@ -49,7 +51,7 @@ def create_self_signed_cert(cert_file_path, CN, O, OU, L, ST, C, email):
     cert.set_version(2)
     cert.set_issuer(subject)
     cert.set_subject(subject)
-    cert.set_serial_number(int.from_bytes(os.urandom(20), byteorder="big"))
+    cert.set_serial_number(int.from_bytes(os.urandom(16), byteorder="big"))
     # cert.set_serial_number(int(rand.bytes(16).encode('hex'), 16))
     cert.gmtime_adj_notBefore(0)
     cert.gmtime_adj_notAfter(31536000)
