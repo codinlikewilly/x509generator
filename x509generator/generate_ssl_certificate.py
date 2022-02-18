@@ -1,6 +1,5 @@
 from OpenSSL.SSL import FILETYPE_PEM
 from OpenSSL.crypto import (dump_certificate, X509, X509Name, PKey, TYPE_RSA, X509Req, dump_privatekey, X509Extension)
-import re
 import sys
 import os
 
@@ -63,7 +62,6 @@ def create_self_signed_cert(dump_directory, CN, O, OU, L, ST, C, email):
         f.write(dump_certificate(FILETYPE_PEM, cert))
     with open(private_key_path, 'wb+') as f:
         f.write(dump_privatekey(FILETYPE_PEM, key))
-    sys.exit(0)
 
 
 if __name__ == "__main__":
